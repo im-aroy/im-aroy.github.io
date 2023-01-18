@@ -9,13 +9,15 @@ export const useShadAPI = (authCode: string|null) => {
   const [i, setI] = useState<number>(0);
 
   useEffect(()=>{
-    setI((+localStorage.getItem('i'))||0);
+    const v = localStorage.getItem('i');
+    if (!v) return;
+    setI(+v || 0);
   }, [])
 
   useEffect(() => {
     if (i != 0) {
-      console.log('SET LOCAL STORAGE : ', i);
-      localStorage.setItem('i', i);
+      console.log('SET LOCAL STORAGE : ', `${i}`);
+      localStorage.setItem('i',  `${i}`);
       iGlobal = i;
     }
   }, [i])
